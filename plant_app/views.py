@@ -62,6 +62,8 @@ def success(request):
 
 
 def logout(request):
+    if 'user' not in request.session:
+        return redirect("/")
     del request.session['user']
     return redirect("/")
 
