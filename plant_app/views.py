@@ -67,6 +67,8 @@ def logout(request):
 
 
 def fern_page(request):
+    if 'user' not in request.session:
+        return redirect("/")
     context = {
         'fern_plants': Plant.objects.filter(plant_type="Ferns")
     }
@@ -74,6 +76,8 @@ def fern_page(request):
 
 
 def succulent_page(request):
+    if 'user' not in request.session:
+        return redirect("/")
     context = {
         'succulent_plants': Plant.objects.filter(plant_type="Succulent")
     }
@@ -81,6 +85,8 @@ def succulent_page(request):
 
 
 def tree_page(request):
+    if 'user' not in request.session:
+        return redirect("/")
     context = {
         'tree_plants': Plant.objects.filter(plant_type="Tree")
     }
@@ -88,6 +94,8 @@ def tree_page(request):
 
 
 def vine_page(request):
+    if 'user' not in request.session:
+        return redirect("/")
     context = {
         'vine_plants': Plant.objects.filter(plant_type="Vine")
     }
@@ -95,9 +103,13 @@ def vine_page(request):
 
 
 def createPlantPageView(request):
+    if 'user' not in request.session:
+        return redirect("/")
     return render(request, "createPlantPage.html")
 
 def createPlantProcessing(request):
+    if 'user' not in request.session:
+        return redirect("/")
     Plant.objects.create(
         plant_type = request.POST['plantTypeLabel'],
         light = request.POST['lightLabel'],
@@ -110,6 +122,8 @@ def createPlantProcessing(request):
     return redirect('/dashboardAll')
 
 def dashboardAllView(request):
+    if 'user' not in request.session:
+        return redirect("/")
     context = {
         'all_plants': Plant.objects.all()
     }
@@ -117,6 +131,8 @@ def dashboardAllView(request):
 
 
 def addingComment(request, id):
+    if 'user' not in request.session:
+        return redirect("/")
     Comment.objects.create(
         comment = request.POST['commentLabel'],
         user = User.objects.get(id= request.session['user']),
@@ -127,6 +143,8 @@ def addingComment(request, id):
 
 
 def addingCommentSucculent(request, id2):
+    if 'user' not in request.session:
+        return redirect("/")
     Comment.objects.create(
         comment = request.POST['commentLabel'],
         user = User.objects.get(id= request.session['user']),
@@ -136,6 +154,8 @@ def addingCommentSucculent(request, id2):
     return redirect('/succulent')
 
 def addingCommentTree(request, id3):
+    if 'user' not in request.session:
+        return redirect("/")
     Comment.objects.create(
         comment = request.POST['commentLabel'],
         user = User.objects.get(id= request.session['user']),
@@ -145,6 +165,8 @@ def addingCommentTree(request, id3):
     return redirect('/tree')
 
 def addingCommentVine(request, id4):
+    if 'user' not in request.session:
+        return redirect("/")
     Comment.objects.create(
         comment = request.POST['commentLabel'],
         user = User.objects.get(id= request.session['user']),
